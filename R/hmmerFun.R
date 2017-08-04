@@ -1,10 +1,19 @@
 hmmStat <- function(hmmfile){
   tmp <- tempfile()
   hmmstat <- paste0('hmmstat ',hmmfile,' > ', tmp)
-  system(hmmstat, ignore.stdout = TRUE)
+  system(hmmstat)
   return(tmp)
 }
 
+getIdsFromStats <- function(stats){
+  rl <- readLines(stats)
+  rl <- rl[which(!grepl("^\\#",rl))]
+  rl <- gsub("[ ]+"," ",rl)
+  lst <- strsplit(rl[-1]," ")
+  
+  ids <- sapply(lst, function(x){x[3]})
+  return(ids)
+}
 
 #' @name hmmPress
 #' @title hmmPress
