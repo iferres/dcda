@@ -1,3 +1,8 @@
+#' @name hmmStat 
+#' @title Compute Hmm Stats
+#' @description Compute hmm stats.
+#' @param hmmfile \code{character} The path to the hmm file.
+#' @return The file name of the temporary file where stats were written.
 hmmStat <- function(hmmfile){
   tmp <- tempfile()
   hmmstat <- paste0('hmmstat ',hmmfile,' > ', tmp)
@@ -5,6 +10,11 @@ hmmStat <- function(hmmfile){
   return(tmp)
 }
 
+#' @name getIdsFromStats
+#' @title Get Pfam Ids From Hmmstats output
+#' @description Get Pfam-A Ids from \code{hmmstat} output.
+#' @param stats The path to the file where the stats were written.
+#' @return A \code{character} vector with the Pfam ids.
 getIdsFromStats <- function(stats){
   rl <- readLines(stats)
   rl <- rl[which(!grepl("^\\#",rl))]
@@ -20,7 +30,6 @@ getIdsFromStats <- function(stats){
 #' @description Wrapper function of \code{hmmpress} (HMMER 3).
 #' @param model \code{character} The name of the hmm file.
 #' @return The names of indexed files.
-#' @author Ignacio Ferres
 hmmPress <- function(model){
   hmmpress <- paste('hmmpress -f', model)
   system(hmmpress, ignore.stdout = TRUE)
@@ -38,7 +47,6 @@ hmmPress <- function(model){
 #' (custom hmm models).
 #' @param n_threads An \code{integer}. The number of cores to use.
 #' @return The path to a temporary file where the hmmsearch output is placed.
-#' @author Ignacio Ferres
 hmmSearch <- function(fasta,
                       hmm,
                       oty = 'domtblout',
@@ -76,7 +84,6 @@ hmmSearch <- function(fasta,
 #' @return A \code{data.frame} with the hmmsearch output.
 #' @note Taken and adapted from \code{micropan} package (Lars Snipen and
 #' Kristian Hovde Liland).
-#' @author Ignacio Ferres
 readDomtblout <- function(domtblout){
   
   rl <- readLines(domtblout)
