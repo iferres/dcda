@@ -1,3 +1,11 @@
+hmmStat <- function(hmmfile){
+  tmp <- tempfile()
+  hmmstat <- paste0('hmmstat ',hmmfile,' > ', tmp)
+  system(hmmstat, ignore.stdout = TRUE)
+  return(tmp)
+}
+
+
 #' @name hmmPress
 #' @title hmmPress
 #' @description Wrapper function of \code{hmmpress} (HMMER 3).
@@ -33,7 +41,7 @@ hmmSearch <- function(fasta,
   
   #run hmmsearch
   blout <- tempfile(pattern = 'tmpo', fileext = '.tab')
-  search <- paste0('hmmsearch -o /dev/null --noali',
+  hmmse <- paste0('hmmsearch -o /dev/null --noali',
                    paste0(' --', oty, ' '),
                    blout,
                    paste0(' --cut_', cut),
@@ -43,7 +51,7 @@ hmmSearch <- function(fasta,
                    ' ',
                    fasta)
   
-  system(pfm)
+  system(hmmse)
   
   return(blout)
   
