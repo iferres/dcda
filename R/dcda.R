@@ -20,8 +20,20 @@ dcda <- function(fastas,
                  cut = 'ga', 
                  distMethod = 'bray', 
                  cpus = 1L){
+  
   #Eval - err
-  # ...
+  if (missing(fastas)){
+    stop('No fasta files provided.')
+  }
+  
+  if (missing(pfamA)){
+    stop('Pfam-A.hmm file path is not provided.')
+  }
+  
+  if (Sys.which("hmmsearch")==""){
+    stop("\n\tHMMER (v.3) is not installed. (Couldn't find 'hmmsearch' in $PATH)
+         \nPlease install it before re-running pangenome().\n\n")
+  }
   
   #Get pfam-A ids
   cat('Retrieving information from Pfam-A.hmm.. ')
