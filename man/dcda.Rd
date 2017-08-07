@@ -23,7 +23,8 @@ acid fasta files.}
 \item{cpus}{\code{integer} The number of cpus to use.}
 }
 \value{
-A \code{dist} object.
+A \code{list} object. The first element is the abundance matrix and
+the second is the \code{dist} matrix.
 }
 \description{
 Compute Pfam-A domain content dissimilarity between two or more
