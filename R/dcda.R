@@ -12,7 +12,8 @@
 #' "altGower", "morisita", "horn", "mountford", "raup" , "binomial", "chao", 
 #' "cao" or "mahalanobis". See \link[vegan]{vegdist} for more information.
 #' @param cpus \code{integer} The number of cpus to use.
-#' @return A \code{dist} object.
+#' @return A \code{list} object. The first element is the abundance matrix and
+#' the second is the \code{dist} matrix.
 #' @importFrom vegan vegdist
 #' @export
 dcda <- function(fastas, 
@@ -74,7 +75,9 @@ dcda <- function(fastas,
   d <- vegan::vegdist(mat, method = distMethod)
   cat('DONE!\n')
   
+  out <- list(mat, d)
+  
   #Return
-  return(d)
+  return(out)
 }
 
