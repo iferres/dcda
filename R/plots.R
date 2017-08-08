@@ -1,8 +1,8 @@
 
 
-dcda.plot <- function(x, 
+plot.dcda <- function(x, 
                       hclustFun = hclust,
-                      distFun = vegan::vegdist,
+                      distFun,
                       margins = c(5, 5), 
                       edgePar = list(lwd = 1.5),
                       matColorFun = colorRampPalette(c('yellow2',
@@ -112,9 +112,11 @@ dcda.plot <- function(x,
   
   ###Keys###
   plot.new()
-  
+  par(mar = c(0, 0, margins[1], margins[2]))
   image(x = 1:100, y = 1, z = cbind(1:100), col = matColorFun(100))
   
+  
+  par(mar = c(0, 0, margins[1], margins[2]))
   image(x = 1:100, y = 1, z = cbind(1:100), col = distColorFun(100))
   
 }
