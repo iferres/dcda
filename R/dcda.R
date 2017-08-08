@@ -76,6 +76,7 @@ dcda <- function(fastas,
   cat('DONE!\n')
   
   out <- list(mat, d)
+  class(out) <- 'dcda'
   
   #Return
   return(out)
