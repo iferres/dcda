@@ -60,7 +60,7 @@ dcda.plot <- function(x,
   par(mar = c(margins[1],
               0,
               0.5,
-              0.5))
+              margins[2]))
   
   image(x = 1:nc,
         y = 1:nr,
@@ -68,7 +68,7 @@ dcda.plot <- function(x,
         xlim = 0.5 + c(0, nc),
         ylim = 0.5 + c(0, nr),
         frame.plot = F,
-        col = matColFun(max(mm)),
+        col = matColorFun(max(mm)),
         yaxt = 'n',
         xaxt = 'n',
         # xaxs= 'r',
@@ -76,7 +76,12 @@ dcda.plot <- function(x,
         xlab = '',
         useRaster = raster,
         xpd = T)
-  
+  axis(4,
+       1:nr, 
+       labels = rownames(mm),
+       las=2, 
+       tick = 0, 
+       line = -1)
   
   
   ### Dist ###
@@ -105,7 +110,11 @@ dcda.plot <- function(x,
        cex.axis = cex.axis,
        las=2)
   
+  ###Keys###
+  plot.new()
   
+  image(x = 1:100, y = 1, z = cbind(1:100), col = matColorFun(100))
   
+  image(x = 1:100, y = 1, z = cbind(1:100), col = distColorFun(100))
   
 }
