@@ -33,7 +33,7 @@ dcda <- function(fastas,
   
   if (Sys.which("hmmsearch")==""){
     stop("\n\tHMMER (v.3) is not installed. (Couldn't find 'hmmsearch' in $PATH)
-         \nPlease install it before re-running pangenome().\n\n")
+         \nPlease install it before re-running dcda().\n\n")
   }
   
   #Get pfam-A ids
