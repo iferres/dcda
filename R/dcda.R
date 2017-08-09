@@ -67,7 +67,8 @@ dcda <- function(fastas,
   
   #Bind and reduce
   mat <- do.call(rbind, mat)
-  rownames(mat) <- sapply(strsplit(fastas, '/'), function(x){ rev(x)[1]})
+  rownames(mat) <- sapply(strsplit(fastas, '/'), function(x){ rev(x)[1] })
+  colnames(mat) <- ids
   mat <- mat[, -which(colSums(mat)==0)]
   
   #Compute dist
