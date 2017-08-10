@@ -41,12 +41,12 @@ dcda <- function(fastas,
   # }
   
   #find binaries
-  hmmstat <- paste0('.', system.file('hmmer3.1b2_binaries/hmmstat',
-                                     package = 'DCDA'))
-  hmmpress <- paste0('.', system.file('hmmer3.1b2_binaries/hmmpress',
-                                      package = 'DCDA'))
-  hmmsearch <- paste0('.', system.file('hmmer3.1b2_binaries/hmmsearch',
-                                       package = 'DCDA'))
+  hmmstat <- system.file('hmmer3.1b2_binaries/hmmstat',
+                         package = 'DCDA')
+  hmmpress <- system.file('hmmer3.1b2_binaries/hmmpress',
+                          package = 'DCDA')
+  hmmsearch <- system.file('hmmer3.1b2_binaries/hmmsearch',
+                           package = 'DCDA')
   
   #Get pfam-A ids
   cat('Retrieving information from Pfam-A.hmm.. ')
@@ -69,8 +69,8 @@ dcda <- function(fastas,
     
     tmp <- tempfile()
     hmmres <- hmmSearch(bin = hmmsearch, 
-                        fastas = x, 
-                        pfamA = pfamA, 
+                        fasta = x, 
+                        hmm = pfamA, 
                         cut = cut, 
                         oty = 'domtblout', 
                         n_threads = 0)
