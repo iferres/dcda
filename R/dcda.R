@@ -27,6 +27,10 @@ dcda <- function(fastas,
     stop('No fasta files provided.')
   }
   
+  if(length(fastas)<2){
+    stop('At least 2 fasta files must be provided.')
+  }
+  
   if (missing(pfamA)){
     stop('Pfam-A.hmm file path is not provided.')
   }
