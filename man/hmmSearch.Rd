@@ -4,9 +4,11 @@
 \alias{hmmSearch}
 \title{Run hmmsearch (HMMER 3)}
 \usage{
-hmmSearch(fasta, hmm, oty = "domtblout", cut = "ga", n_threads = 1L)
+hmmSearch(bin, fasta, hmm, oty = "domtblout", cut = "ga", n_threads = 1L)
 }
 \arguments{
+\item{bin}{The location of \code{hmmsearch} binary.}
+
 \item{fasta}{A protein fasta file.}
 
 \item{hmm}{A hmm file. Must be pressed (see hmmpress from HMMER manual).}

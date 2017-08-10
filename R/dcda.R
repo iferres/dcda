@@ -31,14 +31,22 @@ dcda <- function(fastas,
     stop('Pfam-A.hmm file path is not provided.')
   }
   
-  if (Sys.which("hmmsearch")==""){
-    stop("\n\tHMMER (v.3) is not installed. (Couldn't find 'hmmsearch' in $PATH)
-         \nPlease install it before re-running dcda().\n\n")
-  }
+  # if (Sys.which("hmmsearch")==""){
+  #   stop("\n\tHMMER (v.3) is not installed. (Couldn't find 'hmmsearch' in $PATH)
+  #        \nPlease install it before re-running dcda().\n\n")
+  # }
+  
+  #find binaries
+  hmmstat <- paste0('.', system.file('hmmer3.1b2_binaries/hmmstat',
+                                     package = 'DCDA'))
+  hmmpress <- paste0('.', system.file('hmmer3.1b2_binaries/hmmpress',
+                                      package = 'DCDA'))
+  hmmsearch <- paste0('.', system.file('hmmer3.1b2_binaries/hmmsearch',
+                                       package = 'DCDA'))
   
   #Get pfam-A ids
   cat('Retrieving information from Pfam-A.hmm.. ')
-  stats <- hmmStat(hmmfile = pfamA)
+  stats <- hmmStat(bin = hmmstat, hmmfile = pfamA)
   ids <- getIdsFromStats(stats = stats)
   file.remove(stats)
   cat('DONE!\n')
@@ -47,7 +55,7 @@ dcda <- function(fastas,
   idx <- paste0(pfamA, c('.h3f', '.h3i', '.h3m', '.h3p'))
   if (any(!file.exists(idx))){
     cat('Pfam-A.hmm is not indexed. Pressing Pfam-A.hmm.. ')
-    hmmPress(pfamA)
+    hmmPress(bin = hmmpress, model = pfamA)
     cat('DONE!\n')
   }
   
@@ -56,7 +64,12 @@ dcda <- function(fastas,
   mat <- parallel::mclapply(fastas, function(x){
     
     tmp <- tempfile()
-    hmmres <- hmmSearch(x, pfamA, cut = cut, oty = 'domtblout', n_threads = 0)
+    hmmres <- hmmSearch(bin = hmmsearch, 
+                        fastas = x, 
+                        pfamA = pfamA, 
+                        cut = cut, 
+                        oty = 'domtblout', 
+                        n_threads = 0)
     dtbl <- readDomtblout(domtblout = hmmres)
     file.remove(tmp)
     tab <- table(factor(dtbl$PfamID, levels = ids))

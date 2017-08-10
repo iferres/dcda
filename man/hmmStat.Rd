@@ -4,9 +4,11 @@
 \alias{hmmStat}
 \title{Compute Hmm Stats}
 \usage{
-hmmStat(hmmfile)
+hmmStat(bin, hmmfile)
 }
 \arguments{
+\item{bin}{The location of \code{hmmstat} binary.}
+
 \item{hmmfile}{\code{character} The path to the hmm file.}
 }
 \value{
