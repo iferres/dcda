@@ -46,8 +46,8 @@ hmmPress <- function(bin, model){
 #' @param bin The location of \code{hmmsearch} binary.
 #' @param fasta A protein fasta file.
 #' @param hmm A hmm file. Must be pressed (see hmmpress from HMMER manual).
-#' @param pfam \code{logical}. If hmm file is the Pfam-A.hmm file or not
-#' (custom hmm models).
+#' @param oty The \code{hmmsearch} output type.
+#' @param cut One of "ga" or "tc". See HMMER 3.1b2 manual.
 #' @param n_threads An \code{integer}. The number of cores to use.
 #' @return The path to a temporary file where the hmmsearch output is placed.
 hmmSearch <- function(bin,
@@ -55,7 +55,7 @@ hmmSearch <- function(bin,
                       hmm,
                       oty = 'domtblout',
                       cut = 'ga',
-                      n_threads=1L){
+                      n_threads = 1L){
   
   oty <- match.arg(oty, c('tblout', 'domtblout'))
   cut <- match.arg(cut, c('ga', 'tc'))

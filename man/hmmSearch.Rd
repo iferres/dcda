@@ -13,10 +13,11 @@ hmmSearch(bin, fasta, hmm, oty = "domtblout", cut = "ga", n_threads = 1L)
 
 \item{hmm}{A hmm file. Must be pressed (see hmmpress from HMMER manual).}
 
-\item{n_threads}{An \code{integer}. The number of cores to use.}
+\item{oty}{The \code{hmmsearch} output type.}
 
-\item{pfam}{\code{logical}. If hmm file is the Pfam-A.hmm file or not
-(custom hmm models).}
+\item{cut}{One of "ga" or "tc". See HMMER 3.1b2 manual.}
+
+\item{n_threads}{An \code{integer}. The number of cores to use.}
 }
 \value{
 The path to a temporary file where the hmmsearch output is placed.
