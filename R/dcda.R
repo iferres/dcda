@@ -67,7 +67,7 @@ dcda <- function(fastas,
   cat('Searching.. ')
   mat <- parallel::mclapply(fastas, function(x){
     
-    tmp <- tempfile()
+    # tmp <- tempfile()
     hmmres <- hmmSearch(bin = hmmsearch, 
                         fasta = x, 
                         hmm = pfamA, 
@@ -75,7 +75,7 @@ dcda <- function(fastas,
                         oty = 'domtblout', 
                         n_threads = 0)
     dtbl <- readDomtblout(domtblout = hmmres)
-    file.remove(tmp)
+    file.remove(hmmres)
     tab <- table(factor(dtbl$PfamID, levels = ids))
     tab
     
